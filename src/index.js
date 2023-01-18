@@ -39,19 +39,22 @@ const MORSE_TABLE = {
 };
 
 function decode(string) {
-    return string
-        .match(/.{1,10}/g)
-        .map((elem) => {
-            return elem.replace(/00/g, '').replace(/10/g, '.').replace(/11/g, '-');
-        })
-        .map((elem) => {
-            for (const key in MORSE_TABLE) {
-                if (elem === key) {
-                    return MORSE_TABLE[key];
+    return (
+        string
+            // .match(/.{1,10}/g)
+            .split(/(.{10})/)
+            .map((elem) => {
+                return elem.replace(/00/g, '').replace(/10/g, '.').replace(/11/g, '-');
+            })
+            .map((elem) => {
+                for (const key in MORSE_TABLE) {
+                    if (elem === key) {
+                        return MORSE_TABLE[key];
+                    }
                 }
-            }
-        })
-        .join('');
+            })
+            .join('')
+    );
 }
 
 module.exports = {
